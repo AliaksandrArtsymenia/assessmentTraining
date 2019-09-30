@@ -1,6 +1,9 @@
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -10,7 +13,7 @@ public class IOFileTest extends CommonCondition {
 
     @Test
     public void testIO() {
-        writeToFile(collection.get(1));
+        writeToFile("Yellow\nBlue\nWhite");
         Assert.assertEquals(readFromFile(), collection.get(collection.size() - 2));
     }
 
@@ -24,13 +27,20 @@ public class IOFileTest extends CommonCondition {
     }
 
     private String readFromFile() {
-        String colorFromFile = null;
+        StringBuilder text = new StringBuilder();
         try {
-            Path path = Paths.get(".//target/data.txt");
-            colorFromFile = Files.readAllLines(path).get(0);
+            File path = new File(".//target/data.txt");
+            FileReader fileReader = new FileReader(path);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            String currentLine = bufferedReader.readLine();
+            while (currentLine != null) {
+                text.append(currentLine);
+                text.append("\t");
+                currentLine = bufferedReader.readLine();
+            }
         } catch (IOException e) {
             e.getLocalizedMessage();
         }
-        return colorFromFile;
+        return text.toString();
     }
 }
