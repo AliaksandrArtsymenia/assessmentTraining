@@ -1,0 +1,13 @@
+<suite name="suite collection verification" parallel="method" thread-count="2">
+    <test name="test">
+        <parameter name="expectedSize" value = "6"/>
+        <groups>
+            <run>
+                <include name="Negative"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="LengthVerificationTest"/>
+        </classes>
+    </test>
+</suite>
