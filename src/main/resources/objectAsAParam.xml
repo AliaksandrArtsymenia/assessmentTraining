@@ -1,0 +1,8 @@
+<suite name="suite collection verification">
+    <test name="test">
+        <parameter name="expectedValueOfFirstMapItem" value = "Zero"/>
+        <classes>
+            <class name="MapTest"/>
+        </classes>
+    </test>
+</suite>
