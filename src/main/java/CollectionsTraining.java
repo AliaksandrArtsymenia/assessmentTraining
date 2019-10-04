@@ -16,8 +16,8 @@ public class CollectionsTraining {
         Map<Integer, String> map = new HashMap<>();
         map.put(8, "Eight");
         map.put(1, "One");
-        map.put(2, "two");
-        map.put(0, "zero");
+        map.put(2, "Two");
+        map.put(0, "Zero");
         System.out.println(map.toString());
         return map;
     }
