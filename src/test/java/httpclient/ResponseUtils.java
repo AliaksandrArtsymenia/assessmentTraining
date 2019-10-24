@@ -8,11 +8,15 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import java.io.IOException;
-import java.io.StringReader;
+import javax.xml.soap.MessageFactory;
+import javax.xml.soap.SOAPException;
+import javax.xml.soap.SOAPMessage;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,5 +51,11 @@ public class ResponseUtils {
             nodesContent.add(nodeList.item(i).getTextContent());
         }
         return nodesContent;
+    }
+
+    public ResponseModel unmarshal(String xml) throws JAXBException, IOException, SOAPException {
+        SOAPMessage message = MessageFactory.newInstance().createMessage(null, new ByteArrayInputStream(xml.getBytes()));
+        JAXBContext context = JAXBContext.newInstance(ResponseModel.class);
+        return (ResponseModel) context.createUnmarshaller().unmarshal(message.getSOAPBody().extractContentAsDocument());
     }
 }
