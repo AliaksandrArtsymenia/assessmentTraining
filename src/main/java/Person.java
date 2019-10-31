@@ -11,8 +11,8 @@ public class Person implements Comparable<Person> {
     private String name = "Mr/Ms";
     private Integer age;
     private String sex;
-    @Singular(value = "null")
-    private Set<String> any;
+//    @Singular(value = "null")
+//    private Set<String> any;
 
     @Override
     public int compareTo(Person person) {
